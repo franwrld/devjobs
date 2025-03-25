@@ -32,13 +32,11 @@ class CrearVacante extends Component
 
     public function crearVacante() {
         $datos = $this->validate();
-        // NO GUARDA IMAGEN PENDIENTE
         // Almacenar imagen metodo store de livewire para almacenar en alguna ruta
-        // $imagen almacenara la ubicacion de imagen storage/app/private/public/vacantes/1ie91e1e1rfrrfr3r2rdsgdsdg.png para activar usar php artisan storage:link
-
-        $imagen = $this->imagen->store('public/vacantes');
+        // $imagen almacenara la ubicacion de imagen storage/app/public/vacantes/1ie91e1e1rfrrfr3r2rdsgdsdg.png para activar usar php artisan storage:link
+        $imagen = $this->imagen->store('vacantes', 'public');
         // solo nos interesa el nombre del archivo.png para ello le quitamos las ruta y solo nos quedamos con el nombre de la imagen
-        $datos['imagen'] = str_replace('public/vacantes/', '', $imagen);
+        $datos['imagen'] = str_replace('vacantes/', '', $imagen);
 
         // dd($imagen);
         // Crear Vacante llamar al modelo

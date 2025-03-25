@@ -56,7 +56,7 @@
         {{-- two way data binding / envias datos al servidor y recibir respuesta en el frontend soportado por livewire --}}
         <div class="my-5 w-80">
             <x-input-label :value="__('Imagen Actual')" />
-            <img src="{{ asset('storage/vacantes' . $imagen) }}" alt="{{ 'Imagen Vacante' . $titulo }}">
+            <img src="{{ asset('storage/vacantes/' . $imagen) }}" alt="{{ 'Imagen Vacante' . $titulo }}">
         </div>
         {{-- <div class="my-5 w-80">
             @if ($imagen)
