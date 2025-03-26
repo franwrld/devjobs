@@ -37,4 +37,9 @@ class Vacante extends Model
     {
         return $this->hasMany(Candidato::class);
     }
+    // Una Vacante pertenece a un usuario, nombre reclutador fuera de la convencion de laravel entonces especificamos campos
+    public function reclutador()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }
