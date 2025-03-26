@@ -35,7 +35,7 @@ class Vacante extends Model
     // Una Vacante tiene muchos candidatos
     public function candidatos()
     {
-        return $this->hasMany(Candidato::class);
+        return $this->hasMany(Candidato::class)->orderBy('created_at','DESC');
     }
     // Una Vacante pertenece a un usuario, nombre reclutador fuera de la convencion de laravel entonces especificamos campos
     public function reclutador()
