@@ -13,7 +13,8 @@ class VacantePolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        // Ocultar el accesso a usuarios que buscan empleo rol=2 son reclutadores rol=1 los que buscan empleo
+        return $user->rol === 2;
     }
 
     /**
@@ -29,7 +30,8 @@ class VacantePolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        // Ocultar el accesso a usuarios que buscan empleo a poder crear vacantes rol=2 son reclutadores rol=1 los que buscan empleo
+        return $user->rol === 2;
     }
 
     /**

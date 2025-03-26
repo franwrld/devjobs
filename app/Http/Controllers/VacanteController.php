@@ -13,6 +13,8 @@ class VacanteController extends Controller
      */
     public function index()
     {
+        // Agregamos el policy con gate
+        Gate::authorize('viewAny', Vacante::class);
         return view('vacantes.index');
     }
 
@@ -21,6 +23,8 @@ class VacanteController extends Controller
      */
     public function create()
     {
+        // Agregamos el policy con gate
+        Gate::authorize('create', Vacante::class);
         return view('vacantes.create');
     }
 
