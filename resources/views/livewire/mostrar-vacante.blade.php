@@ -52,5 +52,17 @@
             </p>
         </div>
     @endguest
+    {{-- En caso de buscadores de empleo quieran aplicar a la vacante --}}
+    {{-- cannot es como lo contrario a can es decir, no puede 'crear' entonces si no puede crear que muestre ese livewire para postularse--}}
+    @cannot('create', App\Models\Vacante::class)
+        <livewire:postular-vacante/>
+    @endcannot
+    
+    {{-- Can funciona como un if, create del policy, y le pasamos el modelo con ruta para que funcione --}}
+    {{-- @can('create', App\Models\Vacante::class)
+        <p>Reclutador</p>
+    @else
+        <livewire:postular-vacante/>
+    @endcan --}}
     
 </div>
