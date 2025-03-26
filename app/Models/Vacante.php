@@ -20,4 +20,16 @@ class Vacante extends Model
         'imagen',
         'user_id'
     ];
+    // Para pasar el nombre de la categoria y salario a la vista y no el ID para mostrar Vacante
+    // $variable -> tabla en BD -> nombre de la columna
+    // $vacante->categoria->categoria
+    public function categoria()
+    {
+        return $this->belongsTo(Categoria::class);
+    }
+
+    public function salario()
+    {
+        return $this->belongsTo(Salario::class);
+    }
 }
