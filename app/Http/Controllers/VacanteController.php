@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Vacante;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class VacanteController extends Controller
 {
@@ -44,6 +45,11 @@ class VacanteController extends Controller
      */
     public function edit(Vacante $vacante)
     {
+        // Agregamos el policy con gate
+        if (!Gate::allows('update', $vacante)) {
+            abort(403, 'No tienes permiso para editar esta vacante');
+        }
+
         return view('vacantes.edit', [
             'vacante' => $vacante
         ]);

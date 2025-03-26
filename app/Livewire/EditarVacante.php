@@ -7,6 +7,8 @@ use Livewire\Component;
 use App\Models\Categoria;
 use App\Models\Vacante;
 use Illuminate\Support\Carbon;
+//use Livewire\Features\SupportFileUploads\WithFileUploads;
+use Livewire\WithFileUploads;
 
 class EditarVacante extends Component
 {
@@ -18,14 +20,20 @@ class EditarVacante extends Component
     public $ultimo_dia;
     public $descripcion;
     public $imagen;
-    // Validaciones
+    // Aqui guardaremos la imagen nueva a reemplazar
+    public $imagen_nueva;
+
+    use WithFileUploads;
+
+    // Validaciones en imagen quitamos el required porque podemos no elegir una nueva dejando la imagen que tenia antes o cambiarla
     protected $rules = [
         'titulo' => 'required|string',
         'salario' => 'required',
         'categoria' => 'required',
         'empresa' => 'required',
         'ultimo_dia' => 'required',
-        'descripcion' => 'required'
+        'descripcion' => 'required',
+        'imagen_nueva' => 'nullable|image|max:2048'
     ];
 
     // Mostrar en editar
@@ -53,10 +61,16 @@ class EditarVacante extends Component
 
     public function editarVacante()
     {
+        // $datos almacena todos los ultimos datos
         $datos = $this->validate();
 
         // Si hay nueva imagen
-
+        if($this->imagen_nueva) {
+            // $imagen almacenara la ubicacion de imagen storage/app/public/vacantes/1ie91e1e1rfrrfr3r2rdsgdsdg.png para activar usar php artisan storage:link
+            $imagen = $this->imagen_nueva->store('vacantes', 'public');
+            // solo nos interesa el nombre del archivo.png para ello le quitamos las ruta y solo nos quedamos con el nombre de la imagen
+            $datos['imagen'] = str_replace('vacantes/', '', $imagen);
+        }
         // Encontrar la vacante a editar
         $vacante = Vacante::find($this->vacante_id);
 
@@ -68,6 +82,7 @@ class EditarVacante extends Component
         $vacante->empresa = $datos['empresa'];
         $vacante->ultimo_dia = $datos['ultimo_dia'];
         $vacante->descripcion = $datos['descripcion'];
+        $vacante->imagen = $datos['imagen'] ?? $vacante->imagen;
         // Guardar vacante
         $vacante->save();
         // Redireccionar y crear mensaje

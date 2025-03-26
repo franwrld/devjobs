@@ -27,7 +27,7 @@ class CrearVacante extends Component
         'empresa' => 'required',
         'ultimo_dia' => 'required',
         'descripcion' => 'required',
-        'imagen' => 'required|image|max:1024'
+        'imagen' => 'required|image|max:2048'
     ];
 
     public function crearVacante() {

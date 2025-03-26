@@ -52,19 +52,19 @@
     <!--  -->
     <div>
         <x-input-label for="imagen" :value="__('Imagen')" />
-        <x-text-input id="imagen" class="block mt-1 w-full" type="file" wire:model="imagen" accept="image/*"/>
+        <x-text-input id="imagen" class="block mt-1 w-full" type="file" wire:model="imagen_nueva" accept="image/*"/>
         {{-- two way data binding / envias datos al servidor y recibir respuesta en el frontend soportado por livewire --}}
         <div class="my-5 w-80">
             <x-input-label :value="__('Imagen Actual')" />
             <img src="{{ asset('storage/vacantes/' . $imagen) }}" alt="{{ 'Imagen Vacante' . $titulo }}">
         </div>
-        {{-- <div class="my-5 w-80">
-            @if ($imagen)
-                Imagen:
-                <img src="{{ $imagen->temporaryUrl() }}" alt="">
+        <div class="my-5 w-80">
+            @if ($imagen_nueva)
+                Imagen Nueva:
+                <img src="{{ $imagen_nueva->temporaryUrl() }}" alt="">
             @endif
-        </div> --}}
-        <x-input-error :messages="$errors->get('imagen')" class="mt-2" />
+        </div>
+        <x-input-error :messages="$errors->get('imagen_nueva')" class="mt-2" />
     </div>
 
     <x-primary-button class="w-full justify-center">
