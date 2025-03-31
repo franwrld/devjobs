@@ -8,6 +8,6 @@
 ## Comandos usados
 php artisan storage:link
 composer require livewire/livewire
-deploy:
+deploy DMCld
 php artisan livewire:publish
 php artisan db:seed
